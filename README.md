@@ -7,4 +7,5 @@ A pact-based solution to https://github.com/software-shokunin/coffee-api-challen
 	npm install
 	npm run get-contracts
 	npm run coffee-api
+	curl http://localhost:3000/menu
 ```
