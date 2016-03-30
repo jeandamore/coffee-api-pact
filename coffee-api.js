@@ -5,8 +5,9 @@ function initRoutesForContracts() {
   contractsReader.contracts().forEach(function(contract) {
     console.log("Will setup route for " + contract.request.http_method + " " + contract.request.path);
     app[contract.request.http_method](contract.request.path, function(req, res) {
+      var body = contract.examples.default.response.body;
       res.set(contract.response.headers);
-      res.status(contract.response.status).end(JSON.stringify(contract.examples.default.response.body));
+      res.status(contract.response.status).end((typeof body === 'string') ? body : JSON.stringify(body));
     })
   });
 }
