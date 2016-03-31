@@ -2,7 +2,6 @@
 
 all() 
 {
-	npm install
 	./go-init.sh
 	./go-unit.sh
 	./go-api.sh start
@@ -12,7 +11,6 @@ all()
 
 noruby() 
 {
-	npm install
 	./go-init.sh
 	./go-unit.sh
 	./go-api.sh start
