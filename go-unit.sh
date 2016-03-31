@@ -1,3 +1,3 @@
 #!/bin/sh
 
-echo Unit Tests
+./node_modules/.bin/mocha --reporter nyan ./test/**/*-test.js

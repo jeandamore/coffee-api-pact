@@ -1,10 +1,15 @@
-var app = require('express')();
+'use strict';
+
 var contractsReader = require('./contract-reader')('./coffee-api-challenge/contracts');
 
-function initRoutesForContracts() {
+function CoffeeApi(app) {
+  this.app = app;
+}
+
+CoffeeApi.prototype.initRoutesForContracts = function() {
+  var that = this;
   contractsReader.contracts().forEach(function(contract) {
-    console.log("Will setup route for " + contract.request.http_method + " " + contract.request.path);
-    app[contract.request.http_method](contract.request.path, function(req, res) {
+    that.app[contract.request.http_method](contract.request.path, function(req, res) {
       var body = contract.examples.default.response.body;
       res.set(contract.response.headers);
       res.status(contract.response.status).end((typeof body === 'string') ? body : JSON.stringify(body));
@@ -12,7 +17,8 @@ function initRoutesForContracts() {
   });
 }
 
-app.listen(4567, function() {
-  initRoutesForContracts();
-  console.log('coffee-api listening on *:4567');
-});
+var createCoffeeApi = function(app) {
+  return new CoffeeApi(app);
+}
+
+exports = module.exports = createCoffeeApi;

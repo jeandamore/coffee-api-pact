@@ -8,7 +8,7 @@ usage()
 start() 
 {
 	echo 'Starting Coffee coffee-api...'
-	node coffee-api.js &
+	node src/server.js &
 	echo $! > coffee-api.pid
 	echo '...Coffee API started'
 }
