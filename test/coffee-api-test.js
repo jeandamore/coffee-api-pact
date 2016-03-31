@@ -40,12 +40,12 @@ describe('CoffeeApi', function(done) {
 			coffeeApi.initRoutesForContracts();
 		});
 
-		it('should create get all contracts', function() {
+		it('should get all contracts', function() {
 			chai.expect(contractsSpy).to.have.been.called.once();
 		});
 
 		it('should create a route for the GET contract', function() {
-			chai.expect(getSpy).to.have.been.called.once().with('/route1', function() {});
+			chai.expect(getSpy).to.have.been.called.once();
 		});
 
 		it('should create a route for the POST contract', function() {
