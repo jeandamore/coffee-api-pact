@@ -1,8 +1,8 @@
 #!/bin/sh
 
 pushd coffee-api-challenge
-gem install rake
 gem install bundler
+echo "gem 'rake'" >> Gemfile
 bundle install
-rake "pacto:validate[http://localhost:4567, contracts]" --trace
+bundle exec rake "pacto:validate[http://localhost:4567, contracts]" --trace
 popd
