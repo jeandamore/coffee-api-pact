@@ -1,3 +1,5 @@
+[![Build Status](https://snap-ci.com/jeandamore/coffee-api-pact/branch/master/build_image)](https://snap-ci.com/jeandamore/coffee-api-pact/branch/master)
+
 # coffee-api-pact
 A solution to https://github.com/software-shokunin/coffee-api-challenge
 
@@ -8,7 +10,6 @@ A solution to https://github.com/software-shokunin/coffee-api-challenge
 	Git
 	An Internet Connection
 ```
-
 
 ###To run everything:
 ```
