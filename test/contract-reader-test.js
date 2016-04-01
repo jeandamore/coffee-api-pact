@@ -1,7 +1,7 @@
 'use strict';
 
-var proxyquire = require('proxyquire')
 var chai = require('chai');
+var proxyquire = require('proxyquire')
 chai.use(require('chai-spies'));
 
 describe('ContractReader', function(done) {
