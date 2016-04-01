@@ -1,3 +1,5 @@
 'use strict';
 
-require('./coffee-api')(4567).start();
+import CoffeeApi from './coffee-api';
+
+new CoffeeApi(4567).start();

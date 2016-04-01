@@ -2,7 +2,7 @@
 
 all() 
 {
-	./go-init.sh
+	source ./go-init.sh
 	./go-unit.sh
 	./go-api.sh start
 	./go-contracts.sh
@@ -11,7 +11,7 @@ all()
 
 noruby() 
 {
-	./go-init.sh
+	source ./go-init.sh
 	./go-unit.sh
 	./go-api.sh start
 	./go-api.sh stop

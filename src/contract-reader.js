@@ -1,28 +1,30 @@
 'use strict';
 
-var Fs = require('fs');
+import Fs from 'fs';
 
-function ContractReader(dir) {
-	this.dir = dir;
+class ContractReader {
+
+  constructor(dir) {
+    this.dir = dir;
+    this.contracts = () => this._contracts();
+    this.fixPath = (contract) => this._fixPath(contract);
+  }
+
+	_contracts() {
+		let contracts = [];
+		let that = this;
+		Fs.readdirSync(this.dir).forEach((file) => {
+	    contracts.push(that.fixPath(JSON.parse(Fs.readFileSync(that.dir+'/'+file, 'utf8'))));
+	  });
+	  return contracts;
+	}
+	
+	_fixPath(contract) {
+		contract.request.path = contract.request.path.replace('{', ':').replace('}', '');
+		return contract;
+	}
+
 }
 
-ContractReader.prototype.contracts = function() {
-	var contracts = [];
-	var that = this;
-	Fs.readdirSync(this.dir).forEach(function(file) {
-    contracts.push(that.fixPath(JSON.parse(Fs.readFileSync(that.dir+'/'+file, 'utf8'))));
-  });
-  return contracts;
-}
-
-ContractReader.prototype.fixPath = function(contract) {
-	contract.request.path = contract.request.path.replace('{', ':').replace('}', '');
-	return contract;
-}
-
-var createContractReader = function(dir) {
-	return new ContractReader(dir);
-}
-
-exports = module.exports = createContractReader;
+module.exports = ContractReader;
 

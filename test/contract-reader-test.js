@@ -1,83 +1,85 @@
 'use strict';
 
-var chai = require('chai');
-var proxyquire = require('proxyquire')
-chai.use(require('chai-spies'));
+import chai from 'chai';
+import spies from 'chai-spies';
+import proxyquire from 'proxyquire';
 
-describe('ContractReader', function(done) {
+describe('ContractReader', () => {
 
-	var contractReader;
-	var fsStub = {};
+	let contractReader;
+	let fsStub = {};
 
-	beforeEach(function() {
-		contractReader = proxyquire('../src/contract-reader', { 'fs' : fsStub })('.'); 
+	beforeEach(() => {
+		chai.use(spies);
+		let ContractReader = proxyquire('../src/contract-reader', { 'fs' : fsStub });
+		contractReader = new ContractReader('.');
 	});
 
-	describe('fixPath', function() {
+	describe('fixPath', () => {
 
-		var fixedContract;
+		let fixedContract;
 
-		beforeEach(function() {
+		beforeEach(() => {
 			fixedContract = contractReader.fixPath({ request: { path: '{ and }' }});
 		});
 
-		it('should replace { by : and } by ', function() {
+		it('should replace { by : and } by ', () => {
 			chai.expect(fixedContract.request.path).to.equal(': and ');
 		});
 	})
 
-	describe('contracts', function() {
+	describe('contracts', () => {
 
-		var contractStub;
-		var readDirSyncSpy, readFileSyncSpy;
-		var contracts;
+		let contractStub;
+		let readDirSyncSpy, readFileSyncSpy;
+		let contracts;
 
-		beforeEach(function() {
+		beforeEach(() => {
 			contractStub = "{ "
 				+ "\"request\": { \"http_method\": \"options\", \"path\": \"/menu\" }, "
 				+ "\"response\": { \"headers\": { \"Content-Type\": \"application/json\" }, \"status\": 200 }, "
 				+ "\"examples\": { \"default\": { \"response\": { \"body\": { \"status\": \"READY\" } } } }"
 				+ " }";
-			fsStub.readdirSync = function() { return ['contract1', 'contract2'] };
-			fsStub.readFileSync = function(file) { return contractStub; };
+			fsStub.readdirSync = () => { return ['contract1', 'contract2'] };
+			fsStub.readFileSync = (file) => { return contractStub; };
 			readDirSyncSpy = chai.spy.on(fsStub, 'readdirSync');
 			readFileSyncSpy = chai.spy.on(fsStub, 'readFileSync');
 			contracts = contractReader.contracts();
 		});
 
-		it('should load all contracts in the directory', function() {
+		it('should load all contracts in the directory', () => {
 			chai.expect(readDirSyncSpy).to.have.been.called();
 		});
 
-		it('should load each contract present in directory', function() {
+		it('should load each contract present in directory', () => {
 			chai.expect(readFileSyncSpy).to.have.been.called.exactly(2);
 		});
 
-		it('should return the loaded contracts', function() {
+		it('should return the loaded contracts', () => {
 			chai.expect(contracts.length).to.equal(2);
 		});
 
-		it('should return each loaded contract as an object', function() {
+		it('should return each loaded contract as an object', () => {
 			chai.expect(typeof contracts[0]).to.equal('object');
 		});
 
-		it('should return the loaded contracts with the expected request http_method', function() {
+		it('should return the loaded contracts with the expected request http_method', () => {
 			chai.expect(contracts[0].request.http_method).to.equal('options');
 		});
 
-		it('should return the loaded contracts with the expected request path', function() {
+		it('should return the loaded contracts with the expected request path', () => {
 			chai.expect(contracts[0].request.path).to.equal('/menu');
 		});
 
-		it('should return the loaded contracts with the expected response headers', function() {
+		it('should return the loaded contracts with the expected response headers', () => {
 			chai.expect(contracts[0].response.headers['Content-Type']).to.equal("application/json");
 		});
 
-		it('should return the loaded contracts with the expected response status', function() {
+		it('should return the loaded contracts with the expected response status', () => {
 			chai.expect(contracts[0].response.status).to.equal(200);
 		});
 
-		it('should return the loaded contracts with the expected response body', function() {
+		it('should return the loaded contracts with the expected response body', () => {
 			chai.expect(contracts[0].examples.default.response.body.status).to.equal( 'READY' );
 		});
 

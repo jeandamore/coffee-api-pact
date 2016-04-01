@@ -1,30 +1,32 @@
 'use strict';
 
-var chai = require('chai');
-chai.use(require('chai-spies'));
-var proxyquire = require('proxyquire')
+import chai from 'chai';
+import spies from 'chai-spies';
+import proxyquire from 'proxyquire';
 
-describe('CoffeeApi', function(done) {
+describe('CoffeeApi', () => {
 
-	var coffeeApi;
-	var contractReaderStub = {};
-	var appStub = {};
+	let coffeeApi;
+	let contractReaderStub = {};
+	let appStub = {};
 
-	beforeEach(function() {
-		coffeeApi = proxyquire(
+	beforeEach(() => {
+		chai.use(spies);
+		let CoffeeApi = proxyquire(
 			'../src/coffee-api',  
 			{ 
 				'express' : function() { return appStub; },
 				'./contract-reader' : function(dir) { return contractReaderStub; } 
 			} 
-		)(123);
+		)
+		coffeeApi = new CoffeeApi(123);
 	});
 
-	describe('listen', function() {
+	describe('listen', () => {
 
-		var contractsSpy, getSpy, postSpy;
+		let contractsSpy, getSpy, postSpy;
 
-		beforeEach(function() {
+		beforeEach(() => {
 			contractReaderStub.contracts = function() {
 				return [ { request: { http_method: 'get', path: '/route1' } }, 
 								 { request: { http_method: 'post', path: '/route2' } } ];
@@ -35,27 +37,27 @@ describe('CoffeeApi', function(done) {
 			coffeeApi.listen();
 		});
 
-		it('should get all contracts', function() {
+		it('should get all contracts', () => {
 			chai.expect(contractsSpy).to.have.been.called.once();
 		});
 
-		it('should create a route for the GET contract', function() {
+		it('should create a route for the GET contract', () => {
 			chai.expect(getSpy).to.have.been.called.once();
 		});
 
-		it('should create a route for the POST contract', function() {
+		it('should create a route for the POST contract', () => {
 			chai.expect(postSpy).to.have.been.called.once();
 		});
 
 	})
 
-	describe('start', function() {
+	describe('start', () => {
 
-		var server;
-		var listenSpy;
+		let server;
+		let listenSpy;
 
-		beforeEach(function() {
-			contractReaderStub.contracts = function() {
+		beforeEach(() => {
+			contractReaderStub.contracts = () => {
 				return [ { request: { http_method: 'get', path: '/route1' } }, 
 								 { request: { http_method: 'post', path: '/route2' } } ];
 			};
@@ -63,7 +65,7 @@ describe('CoffeeApi', function(done) {
 			coffeeApi.start();
 		});
 
-		it('should start the node express listener', function() {
+		it('should start the node express listener', () => {
 			chai.expect(listenSpy).to.have.been.called.once();
 		});
 

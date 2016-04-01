@@ -8,7 +8,8 @@ usage()
 start() 
 {
 	echo 'Starting Coffee coffee-api...'
-	node src/server.js &
+	babel-node --presets es2015 src/server.js &
+	#node src/server.js &
 	echo $! > coffee-api.pid
 	echo '...Coffee API started'
 }
@@ -19,8 +20,8 @@ stop()
 
 	if [ -f "coffee-api.pid" ]; then
 		while read line           
-		do           
-    		kill -9 $line           
+		do    
+			pkill -TERM -P $line           
 		done < "coffee-api.pid"
 	fi
 	rm -f coffee-api.pid
