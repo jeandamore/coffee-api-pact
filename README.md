@@ -4,12 +4,11 @@
 
 ##Synopsys
 A solution to https://github.com/software-shokunin/coffee-api-challenge.
-The rule of this solution is that it must be able to fulfil any contract present in the coffee-api-challenge repo while being agnistic of the actual request and responses for these contracts. A side effect is that any new contract will be automatically fulfilled.
+The rule of this solution is that it must be able to fulfil any contract present in the coffee-api-challenge repo while being agnostic of the actual requests and responses for these contracts. A side effect is that any new contract will be automatically fulfilled.
 
 ##Public API
-```
 http://coffee-api-pact.herokuapp.com
-```
+
 
 ##Development
 
