@@ -5,7 +5,9 @@
   "main": "index.js",
   "author": "",
   "license": "ISC",
-  "scripts": {},
+  "scripts": {
+    "start": "./node_modules/.bin/babel-node --presets es2015 src/server.js"
+  },
   "babel": {
     "presets": [
       "es2015"
