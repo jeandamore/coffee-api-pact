@@ -1,1 +1,1 @@
-web: ./go-api.sh run
+web: ./go.sh run
