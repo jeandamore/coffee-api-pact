@@ -9,7 +9,7 @@ class Api {
     this.contractReader = new ContractReader('./coffee-api-challenge/contracts');
     this.port = port;
     this.app = App();
-    this.routes  = '';
+    this.urls  = '';
     this.response = (contract) => this._response(contract);
     this.routes = () => this._routes();
     this.start = () => this._start();
@@ -19,7 +19,7 @@ class Api {
   _info() {
     let that = this;
     this.app.get('/', function(req, res) { 
-      res.status(200).end(that.routes);
+      res.status(200).end(that.urls);
     });
   }
 
@@ -35,7 +35,7 @@ class Api {
     let that = this;
     this.contractReader.contracts().forEach(function(contract) {
       that.app[contract.request.http_method](contract.request.path, that.response(contract));
-      that.routes = that.routes + contract.request.http_method.toUpperCase() + ' ' + contract.request.path + '\n';
+      that.urls = that.urls + contract.request.http_method.toUpperCase() + ' ' + contract.request.path + '\n';
     });
     this.info();
   }
