@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 pushd coffee-api-challenge
 gem install bundler
