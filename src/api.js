@@ -3,7 +3,7 @@
 import App from 'express';
 import ContractReader from './contract-reader';
 
-class CoffeeApi {
+class Api {
 
   constructor(port) {
     this.contractReader = new ContractReader('./coffee-api-challenge/contracts');
@@ -35,4 +35,4 @@ class CoffeeApi {
 
 }
 
-module.exports = CoffeeApi;
+module.exports = Api;

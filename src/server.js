@@ -1,5 +1,5 @@
 'use strict';
 
-import CoffeeApi from './coffee-api';
+import Api from './api';
 
-new CoffeeApi(4567).start();
+new Api(4567).start();

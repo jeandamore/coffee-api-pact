@@ -7,25 +7,25 @@ usage()
 
 start() 
 {
-	echo 'Starting Coffee coffee-api...'
+	echo 'Starting API...'
 	babel-node --presets es2015 src/server.js &
-	echo $! > coffee-api.pid
-	echo '...Coffee API started'
+	echo $! > api.pid
+	echo '...API started'
 }
 
 stop()
 {
-	echo 'Stopping Coffee coffee-api...'
+	echo 'Stopping API...'
 
-	if [ -f "coffee-api.pid" ]; then
+	if [ -f "api.pid" ]; then
 		while read line           
 		do    
 			pkill -TERM -P $line           
-		done < "coffee-api.pid"
+		done < "api.pid"
 	fi
 	rm -f coffee-api.pid
 
-	echo '...Coffee API stopped'
+	echo '...API stopped'
 }
 
 

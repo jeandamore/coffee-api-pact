@@ -4,22 +4,22 @@ import chai from 'chai';
 import spies from 'chai-spies';
 import proxyquire from 'proxyquire';
 
-describe('CoffeeApi', () => {
+describe('Api', () => {
 
-	let coffeeApi;
+	let api;
 	let contractReaderStub = {};
 	let appStub = {};
 
 	beforeEach(() => {
 		chai.use(spies);
-		let CoffeeApi = proxyquire(
-			'../src/coffee-api',  
+		let Api = proxyquire(
+			'../src/api',  
 			{ 
 				'express' : function() { return appStub; },
 				'./contract-reader' : function(dir) { return contractReaderStub; } 
 			} 
 		)
-		coffeeApi = new CoffeeApi(123);
+		api = new Api(123);
 	});
 
 	describe('listen', () => {
@@ -34,7 +34,7 @@ describe('CoffeeApi', () => {
 			contractsSpy = chai.spy.on(contractReaderStub, 'contracts');
 			getSpy = chai.spy.on(appStub, 'get');
 			postSpy = chai.spy.on(appStub, 'post');
-			coffeeApi.listen();
+			api.listen();
 		});
 
 		it('should get all contracts', () => {
@@ -62,7 +62,7 @@ describe('CoffeeApi', () => {
 								 { request: { http_method: 'post', path: '/route2' } } ];
 			};
 			listenSpy = chai.spy.on(appStub, 'listen');
-			coffeeApi.start();
+			api.start();
 		});
 
 		it('should start the node express listener', () => {
