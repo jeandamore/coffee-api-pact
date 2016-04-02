@@ -5,6 +5,11 @@ usage()
 	echo "Usage: api [start|stop]"
 }
 
+run() 
+{
+	./node_modules/.bin/babel-node --presets es2015 src/server.js
+}
+
 start() 
 {
 	echo 'Starting API...'
@@ -29,7 +34,7 @@ stop()
 }
 
 
-if [ $# -eq 0 ] || ([ $1 != "start" ] && [ $1 != "stop" ]); then
+if [ $# -eq 0 ] || ([ $1 != "run" ] && [ $1 != "stat" ] && [ $1 != "stop" ]); then
 	usage
 else
 	$1
