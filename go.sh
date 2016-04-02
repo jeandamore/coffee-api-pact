@@ -41,7 +41,6 @@ stop()
 			pkill -TERM -P $line           
 		done < "api.pid"
 	fi
-	rm -f coffee-api.pid
 
 	echo 'API stopped'
 }

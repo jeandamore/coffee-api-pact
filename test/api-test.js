@@ -22,7 +22,7 @@ describe('Api', () => {
 		api = new Api(123);
 	});
 
-	describe('listen', () => {
+	describe('routes', () => {
 
 		let contractsSpy, getSpy, postSpy;
 
@@ -34,18 +34,18 @@ describe('Api', () => {
 			contractsSpy = chai.spy.on(contractReaderStub, 'contracts');
 			getSpy = chai.spy.on(appStub, 'get');
 			postSpy = chai.spy.on(appStub, 'post');
-			api.listen();
+			api.routes();
 		});
 
 		it('should get all contracts', () => {
 			chai.expect(contractsSpy).to.have.been.called.once();
 		});
 
-		it('should create a route for the GET contract', () => {
-			chai.expect(getSpy).to.have.been.called.once();
+		it('should create two GET routes: one for the root path and one for /route1', () => {
+			chai.expect(getSpy).to.have.been.called.twice();
 		});
 
-		it('should create a route for the POST contract', () => {
+		it('should create one PIST route for /route2', () => {
 			chai.expect(postSpy).to.have.been.called.once();
 		});
 

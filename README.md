@@ -4,16 +4,16 @@
 
 ##Synopsys
 A solution to https://github.com/software-shokunin/coffee-api-challenge.
-The design principle of this solution is to be able to fulfil any contract (existing or new) from the coffee-api-challenge repo.
+The rule of this solution is that it must be able to fulfil any contract present in the coffee-api-challenge repo while being agnistic of the actual request and responses for these contracts. A side effect is that any new contract will be automatically fulfilled.
 
-##Challenge Services
+##Public API
 ```
-GET http://coffee-api-pact.herokuapp.com/menu
-GET http://coffee-api-pact.herokuapp.com/order/{orderId}
-POST http://coffee-api-pact.herokuapp.com/order/{coffeeType}
+http://coffee-api-pact.herokuapp.com
 ```
 
-##Prerequisites
+##Development
+
+###Prerequisites
 ```
 	NodeJS
 	Ruby 2.2.3 & RubyGems (to run contracts)
@@ -21,7 +21,7 @@ POST http://coffee-api-pact.herokuapp.com/order/{coffeeType}
 	An Internet Connection
 ```
 
-##CLI
+###CLI
 
 Bootstrap command
 ```

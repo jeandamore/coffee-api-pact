@@ -9,9 +9,18 @@ class Api {
     this.contractReader = new ContractReader('./coffee-api-challenge/contracts');
     this.port = port;
     this.app = App();
+    this.routes  = '';
     this.response = (contract) => this._response(contract);
-    this.listen = () => this._listen();
+    this.routes = () => this._routes();
     this.start = () => this._start();
+    this.info = () => this._info();
+  }
+
+  _info() {
+    let that = this;
+    this.app.get('/', function(req, res) { 
+      res.status(200).end(that.routes);
+    });
   }
 
   _response(contract) {
@@ -22,16 +31,18 @@ class Api {
     }
   }
 
-  _listen() {
+  _routes() {
     let that = this;
     this.contractReader.contracts().forEach(function(contract) {
       that.app[contract.request.http_method](contract.request.path, that.response(contract));
+      that.routes = that.routes + contract.request.http_method.toUpperCase() + ' ' + contract.request.path + '\n';
     });
+    this.info();
   }
 
   _start() {
     console.log("API listening on port " + this.port);
-    this.app.listen(this.port, this.listen);
+    this.app.listen(this.port, this.routes);
   }
 
 }
