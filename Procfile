@@ -1,1 +1,1 @@
-web: ./go-init.sh
+web: echo "Hello World"
