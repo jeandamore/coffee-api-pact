@@ -1,1 +1,1 @@
-web: ./go-init.sh && ./go-api.sh start
+web: ./go-init.sh
