@@ -1,8 +1,15 @@
 [![Build Status](https://snap-ci.com/jeandamore/coffee-api-pact/branch/master/build_image)](https://snap-ci.com/jeandamore/coffee-api-pact/branch/master)
 
-# coffee-api-pact
+#coffee-api-pact
+
+##Synopsys
 A solution to https://github.com/software-shokunin/coffee-api-challenge.
 The design principle of this solution is to be able to fulfil any contract (existing or new) from the coffee-api-challenge repo.
+
+##Services
+GET http://coffee-api-pact.herokuapp.com/menu
+GET http://coffee-api-pact.herokuapp.com/order/{orderId}
+POST http://coffee-api-pact.herokuapp.com/order/{orderId}
 
 ##Prerequisites
 ```
@@ -12,33 +19,35 @@ The design principle of this solution is to be able to fulfil any contract (exis
 	An Internet Connection
 ```
 
-###To run everything:
+##CLI
+
+###Bootstrap command
 ```
 	./go.sh
 ```
 
-###To run everything but the contracts (no need for Ruby):
+###Bootstrap without running the Ruby/Pact contracts
 ```
 	./go.sh noruby
 ```
 
-###To start the coffee API:
+###Start the coffee API
 ```
-	./go-init.sh
-	./go-api.sh start
-```
-
-###To stop the coffee API:
-```
-	./go-api.sh stop
+	./go.sh init
+	./go.sh start
 ```
 
-###To run the unit tests:
+###Stop the coffee API
 ```
-	./go-unit.sh
+	./go.sh stop
 ```
 
-###To run the contract tests:
+###Run the unit tests
 ```
-	./go-contracts.sh
+	./go.sh unit
+```
+
+###Run the Ruby/Pact contract tests
+```
+	./go.sh contracts
 ```
