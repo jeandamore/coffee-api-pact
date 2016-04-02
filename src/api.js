@@ -30,6 +30,7 @@ class Api {
   }
 
   _start() {
+    console.log("Will start API on port " + this.port);
     this.app.listen(this.port, this.listen);
   }
 

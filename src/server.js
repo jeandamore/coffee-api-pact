@@ -2,4 +2,4 @@
 
 import Api from './api';
 
-new Api(4567).start();
+new Api(process.env.PORT || 4567).start();
