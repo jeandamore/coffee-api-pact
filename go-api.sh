@@ -8,7 +8,7 @@ usage()
 start() 
 {
 	echo 'Starting API...'
-	babel-node --presets es2015 src/server.js &
+	./node_modules/.bin/babel-node --presets es2015 src/server.js &
 	echo $! > api.pid
 	echo '...API started'
 }
