@@ -9,7 +9,6 @@ start()
 {
 	echo 'Starting Coffee coffee-api...'
 	babel-node --presets es2015 src/server.js &
-	#node src/server.js &
 	echo $! > coffee-api.pid
 	echo '...Coffee API started'
 }
