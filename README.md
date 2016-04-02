@@ -27,7 +27,7 @@ Bootstrap command
 	./go.sh
 ```
 
-Bootstrap without running the Ruby/Pact contracts
+Bootstrap without running the Pacto contracts
 ```
 	./go.sh noruby
 ```
@@ -48,7 +48,7 @@ Run the unit tests
 	./go.sh unit
 ```
 
-Run the Ruby/Pact contract tests
+Run the Pacto contract tests
 ```
 	./go.sh contracts
 ```
