@@ -6,10 +6,12 @@
 A solution to https://github.com/software-shokunin/coffee-api-challenge.
 The design principle of this solution is to be able to fulfil any contract (existing or new) from the coffee-api-challenge repo.
 
-##Services
+##Challenge Services
+```
 GET http://coffee-api-pact.herokuapp.com/menu
 GET http://coffee-api-pact.herokuapp.com/order/{orderId}
-POST http://coffee-api-pact.herokuapp.com/order/{orderId}
+POST http://coffee-api-pact.herokuapp.com/order/{coffeeType}
+```
 
 ##Prerequisites
 ```
@@ -21,33 +23,33 @@ POST http://coffee-api-pact.herokuapp.com/order/{orderId}
 
 ##CLI
 
-###Bootstrap command
+Bootstrap command
 ```
 	./go.sh
 ```
 
-###Bootstrap without running the Ruby/Pact contracts
+Bootstrap without running the Ruby/Pact contracts
 ```
 	./go.sh noruby
 ```
 
-###Start the coffee API
+Start the coffee API
 ```
 	./go.sh init
 	./go.sh start
 ```
 
-###Stop the coffee API
+Stop the coffee API
 ```
 	./go.sh stop
 ```
 
-###Run the unit tests
+Run the unit tests
 ```
 	./go.sh unit
 ```
 
-###Run the Ruby/Pact contract tests
+Run the Ruby/Pact contract tests
 ```
 	./go.sh contracts
 ```
