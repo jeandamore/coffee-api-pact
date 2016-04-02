@@ -1,2 +1,2 @@
 worker: ./go-init.sh
-web: ./go-api.sh run
+web: ./go-init.sh && ./go-api.sh run
